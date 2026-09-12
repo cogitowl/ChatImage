@@ -1,10 +1,19 @@
 // Names changed when Minecraft split rendering into extraction in 26.1.
 // Keep shared code and transform the renamed identifiers at build time.
+def gameParts = project.minecraft_version.tokenize('.').collect { it.toInteger() }
+def gamePatch = gameParts.size() > 2 ? gameParts[2] : 0
+def beforeRecords = gameParts[1] < 21 || gamePatch < 5
+def beforeRenderTypes = gameParts[1] < 21 || gamePatch < 2
 [sourceSets.main, sourceSets.smoke].each { sources ->
     def originalDirs = sources.java.srcDirs.toList()
     def prepared = tasks.register('prepare' + sources.name.capitalize() + 'LegacySources', Sync) {
         inputs.file rootProject.file('../compat-1.21.gradle')
-        from originalDirs
+        from(originalDirs) {
+            if (beforeRecords && sources.name == 'main') {
+                exclude '**/ChatImageStyle.java', '**/HoverEventActionMixin.java'
+            }
+        }
+        if (beforeRecords && sources.name == 'main') from rootProject.file('../game-pre-1.21.5/src/main/java')
         into layout.buildDirectory.dir('generated/sources/compat/' + sources.name)
         filteringCharset = 'UTF-8'
         filter { line ->
@@ -12,6 +21,43 @@
                 line = line.replace('Identifier', 'ResourceLocation')
                     .replace('net.minecraft.client.gui.screens.ChatScreen.class', 'net.minecraft.client.gui.screens.Screen.class')
                     .replace('Style style, boolean insertionMode, CallbackInfoReturnable<Boolean> cir', 'Style style, CallbackInfoReturnable<Boolean> cir')
+            }
+            if (gameParts[1] < 21 || gamePatch < 9) {
+                line = line.replace('KeyMapping.Category.register(ResourceLocation.fromNamespaceAndPath(MOD_ID, "config"))', '"config.chatimage.category"')
+                    .replace('new ChatScreen(sb.toString(), true)', 'new ChatScreen(sb.toString())')
+                    .replace('onClick(net.minecraft.client.input.MouseButtonEvent click, boolean doubled)', 'onClick(double mouseX, double mouseY)')
+                    .replace('super.onClick(click, doubled)', 'super.onClick(mouseX, mouseY)')
+                    .replace('onRelease(net.minecraft.client.input.MouseButtonEvent click)', 'onRelease(double mouseX, double mouseY)')
+                    .replace('super.onRelease(click)', 'super.onRelease(mouseX, mouseY)')
+            }
+            if (gameParts[1] < 21 || gamePatch <= 5) {
+                line = line.replace('org.joml.Matrix3x2fStack pose', 'com.mojang.blaze3d.vertex.PoseStack pose')
+                    .replace('.pushMatrix()', '.pushPose()')
+                    .replace('.popMatrix()', '.popPose()')
+                    .replace('this.pose.translate(0.0F, 0.0F)', 'this.pose.translate(0.0F, 0.0F, 400.0F)')
+                    .replace('setTooltipForNextFrame', 'renderTooltip')
+                    .replace('com.mojang.blaze3d.pipeline.RenderPipeline pipeline', 'java.util.function.Function<ResourceLocation, net.minecraft.client.renderer.RenderType> pipeline')
+                    .replace('net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED', 'net.minecraft.client.renderer.RenderType::guiTextured')
+                    .replace('(Object)this, l, m, allWidth, allHeight,', '(Object)this, l, m, allWidth, allHeight, 400,')
+            }
+            if (beforeRecords) {
+                if (line.contains('import ') && line.contains('ChatImageStyle.ShowImage;')) line = ''
+                line = line.replaceAll('if \\(\\!\\(hoverEvent instanceof ShowImage\\(ChatImageCode code\\)\\)\\)\\s*return;', 'ChatImageCode code = hoverEvent.getValue(io.github.kituin.chatimage.tool.ChatImageStyle.SHOW_IMAGE); if (code == null) return;')
+                    .replace('if (style.getHoverEvent() instanceof ChatImageStyle.ShowImage(ChatImageCode action)) action.retry();', 'ChatImageCode action = style.getHoverEvent().getValue(ChatImageStyle.SHOW_IMAGE); if (action != null) action.retry();')
+                    .replace('new ChatImageStyle.ShowImage(', 'new HoverEvent(ChatImageStyle.SHOW_IMAGE, ')
+                    .replace('!(decoded instanceof ChatImageStyle.ShowImage)', 'decoded.getValue(ChatImageStyle.SHOW_IMAGE) == null')
+                    .replace('.getClickEvent().action()', '.getClickEvent().getAction()')
+                    .replace('DynamicTexture(() -> id.toString(), nativeImage)', 'DynamicTexture(nativeImage)')
+            }
+            if (beforeRenderTypes) {
+                if (line.contains('java.util.function.Function<ResourceLocation, net.minecraft.client.renderer.RenderType> pipeline,')) line = ''
+                if (line.contains('net.minecraft.client.renderer.RenderType::guiTextured,')) line = ''
+                if (line.trim() == 'null);') line = '                                );'
+                line = line.replace('allWidth, allHeight, 400,', 'allWidth, allHeight, 400')
+            }
+            if (gameParts[1] < 21) {
+                if (line.trim() == 'int invalidFilesCount,') line = ''
+                line = line.replace('ResourceLocation.fromNamespaceAndPath(', 'new ResourceLocation(')
             }
             line
             .replace('GuiGraphicsExtractor', 'GuiGraphics')

@@ -228,34 +228,21 @@
       "loader": "neoforge",
       "target": "1.20.5",
       "game_versions": [
-        "1.20.5",
-        "1.20.6"
+        "1.20.5"
       ],
-      "path": "neoforge/neoforge-1.20.5",
+      "path": "modern/neoforge-1.20.5",
       "java": 21,
-      "status": "inherited-unverified"
-    },
-    {
-      "loader": "neoforge",
-      "target": "1.21.0",
-      "game_versions": [
-        "1.21",
-        "1.21.1"
-      ],
-      "path": "neoforge/neoforge-1.21.0",
-      "java": 21,
-      "status": "inherited-unverified"
+      "status": "port-in-progress"
     },
     {
       "loader": "neoforge",
       "target": "1.21.2",
       "game_versions": [
-        "1.21.2",
-        "1.21.3"
+        "1.21.2"
       ],
-      "path": "neoforge/neoforge-1.21.2",
+      "path": "modern/neoforge-1.21.2",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "port-in-progress"
     },
     {
       "loader": "neoforge",
@@ -263,9 +250,9 @@
       "game_versions": [
         "1.21.4"
       ],
-      "path": "neoforge/neoforge-1.21.4",
+      "path": "modern/neoforge-1.21.4",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "port-in-progress"
     },
     {
       "loader": "neoforge",
@@ -273,9 +260,9 @@
       "game_versions": [
         "1.21.5"
       ],
-      "path": "neoforge/neoforge-1.21.5",
+      "path": "modern/neoforge-1.21.5",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "port-in-progress"
     },
     {
       "loader": "neoforge",
@@ -283,9 +270,9 @@
       "game_versions": [
         "1.21.6"
       ],
-      "path": "neoforge/neoforge-1.21.6",
+      "path": "modern/neoforge-1.21.6",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "port-in-progress"
     },
     {
       "loader": "fabric",
@@ -385,7 +372,7 @@
       ],
       "path": "modern/forge-26.1",
       "java": 25,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "forge",
@@ -425,7 +412,7 @@
       ],
       "path": "modern/neoforge-26.1",
       "java": 25,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "neoforge",
@@ -435,7 +422,7 @@
       ],
       "path": "modern/neoforge-26.1.1",
       "java": 25,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "neoforge",
@@ -466,7 +453,7 @@
       ],
       "path": "fabric/fabric-1.19.1",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "quilt",
@@ -476,7 +463,7 @@
       ],
       "path": "fabric/fabric-1.19.2",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "quilt",
@@ -486,7 +473,7 @@
       ],
       "path": "fabric/fabric-1.19.3",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "quilt",
@@ -496,7 +483,7 @@
       ],
       "path": "fabric/fabric-1.19.4",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "quilt",
@@ -508,7 +495,7 @@
       ],
       "path": "fabric/fabric-1.20",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "quilt",
@@ -519,7 +506,7 @@
       ],
       "path": "fabric/fabric-1.20.3",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "quilt",
@@ -530,7 +517,7 @@
       ],
       "path": "fabric/fabric-1.20.5",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "quilt",
@@ -541,7 +528,7 @@
       ],
       "path": "fabric/fabric-1.21",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "quilt",
@@ -552,7 +539,7 @@
       ],
       "path": "fabric/fabric-1.21.2",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "quilt",
@@ -562,7 +549,7 @@
       ],
       "path": "fabric/fabric-1.21.4",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "quilt",
@@ -572,7 +559,7 @@
       ],
       "path": "fabric/fabric-1.21.5",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "quilt",
@@ -584,7 +571,7 @@
       ],
       "path": "fabric/fabric-1.21.6",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "quilt",
@@ -595,7 +582,7 @@
       ],
       "path": "fabric/fabric-1.21.9",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "quilt",
@@ -615,7 +602,7 @@
       ],
       "path": "modern/forge-1.21.9",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "forge",
@@ -625,7 +612,7 @@
       ],
       "path": "modern/forge-1.21.10",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "forge",
@@ -635,7 +622,7 @@
       ],
       "path": "modern/forge-1.21.11",
       "java": 21,
-      "status": "build-verified"
+      "status": "runtime-smoke-verified"
     },
     {
       "loader": "neoforge",
@@ -645,7 +632,7 @@
       ],
       "path": "modern/neoforge-1.21.9",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "neoforge",
@@ -655,7 +642,7 @@
       ],
       "path": "modern/neoforge-1.21.10",
       "java": 21,
-      "status": "port-in-progress"
+      "status": "runtime-smoke-verified"
     },
     {
       "loader": "neoforge",
@@ -666,6 +653,156 @@
       "path": "modern/neoforge-1.21.11",
       "java": 21,
       "status": "runtime-smoke-verified"
+    },
+    {
+      "loader": "forge",
+      "target": "1.21.6",
+      "game_versions": [
+        "1.21.6"
+      ],
+      "path": "modern/forge-1.21.6",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "forge",
+      "target": "1.21.7",
+      "game_versions": [
+        "1.21.7"
+      ],
+      "path": "modern/forge-1.21.7",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "forge",
+      "target": "1.21.8",
+      "game_versions": [
+        "1.21.8"
+      ],
+      "path": "modern/forge-1.21.8",
+      "java": 21,
+      "status": "build-verified"
+    },
+    {
+      "loader": "neoforge",
+      "target": "1.21.7",
+      "game_versions": [
+        "1.21.7"
+      ],
+      "path": "modern/neoforge-1.21.7",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "neoforge",
+      "target": "1.21.8",
+      "game_versions": [
+        "1.21.8"
+      ],
+      "path": "modern/neoforge-1.21.8",
+      "java": 21,
+      "status": "runtime-smoke-verified"
+    },
+    {
+      "loader": "forge",
+      "target": "1.21.5",
+      "game_versions": [
+        "1.21.5"
+      ],
+      "path": "modern/forge-1.21.5",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "forge",
+      "target": "1.20.6",
+      "game_versions": [
+        "1.20.6"
+      ],
+      "path": "modern/forge-1.20.6",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "forge",
+      "target": "1.21",
+      "game_versions": [
+        "1.21"
+      ],
+      "path": "modern/forge-1.21",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "forge",
+      "target": "1.21.1",
+      "game_versions": [
+        "1.21.1"
+      ],
+      "path": "modern/forge-1.21.1",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "forge",
+      "target": "1.21.3",
+      "game_versions": [
+        "1.21.3"
+      ],
+      "path": "modern/forge-1.21.3",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "forge",
+      "target": "1.21.4",
+      "game_versions": [
+        "1.21.4"
+      ],
+      "path": "modern/forge-1.21.4",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "neoforge",
+      "target": "1.20.6",
+      "game_versions": [
+        "1.20.6"
+      ],
+      "path": "modern/neoforge-1.20.6",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "neoforge",
+      "target": "1.21",
+      "game_versions": [
+        "1.21"
+      ],
+      "path": "modern/neoforge-1.21",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "neoforge",
+      "target": "1.21.1",
+      "game_versions": [
+        "1.21.1"
+      ],
+      "path": "modern/neoforge-1.21.1",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "neoforge",
+      "target": "1.21.3",
+      "game_versions": [
+        "1.21.3"
+      ],
+      "path": "modern/neoforge-1.21.3",
+      "java": 21,
+      "status": "port-in-progress"
     }
   ],
   "unavailable": [

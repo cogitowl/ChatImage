@@ -1,0 +1,57 @@
+plugins { id 'java'; id 'net.neoforged.moddev' version '2.0.146' }
+version='1.4.8-continued.1+1.21.8+neoforge'
+group='io.github.cogitowl'
+base { archivesName='ChatImage' }
+repositories {  mavenCentral(); maven { url='https://maven.kituin.fun/releases' } }
+neoForge { version='21.8.54'; runs { client { client() }; server { server(); programArgument '--nogui' } }; mods { chatimage { sourceSet sourceSets.main } } }
+sourceSets.main {
+ java.srcDirs=['../common/src/main/java', '../game-26.1/src/main/java','../fml/src/main/java','../neoforge/src/main/java']
+ resources.srcDirs=['../common/src/main/resources','../neoforge/src/main/resources']
+}
+configurations { embedded }
+dependencies {
+
+ implementation 'io.github.kituin:ChatImageCode:0.12.2'
+ additionalRuntimeClasspath 'io.github.kituin:ChatImageCode:0.12.2'
+ embedded('io.github.kituin:ChatImageCode:0.12.2') { transitive=false }
+}
+java { sourceCompatibility=JavaVersion.VERSION_21; targetCompatibility=JavaVersion.VERSION_21; withSourcesJar() }
+tasks.withType(JavaCompile).configureEach { options.release=21; options.encoding='UTF-8' }
+processResources {
+ inputs.property 'version', project.version
+ inputs.property 'minecraft_version', project.minecraft_version
+ filesMatching('META-INF/*.toml') { expand version: project.version, minecraft_version: project.minecraft_version }
+}
+jar {
+ from('../LICENSE')
+ from({ configurations.embedded.collect { zipTree(it) } }) {
+  exclude 'META-INF/MANIFEST.MF', 'META-INF/*.SF', 'META-INF/*.RSA', 'META-INF/*.DSA'
+ }
+ duplicatesStrategy=DuplicatesStrategy.EXCLUDE
+ manifest { attributes 'MixinConfigs':'ChatImage.mixins.json' }
+}
+
+sourceSets {
+    smoke {
+        compileClasspath += sourceSets.main.output + configurations.compileClasspath
+        runtimeClasspath += output + compileClasspath + configurations.runtimeClasspath
+        java.srcDirs = ['../smoke-common/src/main/java', '../smoke-neoforge/src/main/java']
+        resources.srcDirs = ['../smoke-neoforge/src/main/resources']
+    }
+}
+if (project.hasProperty('smoke')) {
+    neoForge.mods { chatimage_smoke { sourceSet sourceSets.smoke } }
+    neoForge.runs.client { gameDirectory = file('run-smoke') }
+    tasks.named('runClient') {
+        dependsOn smokeClasses
+        doFirst { delete 'run-smoke/smoke-result.txt' }
+        doLast {
+            def result = file('run-smoke/smoke-result.txt')
+            if (!result.exists() || !result.text.startsWith('OK:')) {
+                throw new GradleException('ChatImage runtime smoke test failed: ' + (result.exists() ? result.text : 'no result'))
+            }
+        }
+    }
+}
+
+apply from: '../compat-1.21.gradle'
