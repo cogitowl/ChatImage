@@ -1,4 +1,4 @@
-> **CoGitOwl 兼容分支**：正在扩展 Minecraft 1.19–26.2 的四加载器支持。已验证版本、构建方式和限制见 [CONTINUED.md](CONTINUED.md)。
+> **CoGitOwl 维护分支：仅支持 Fabric 和 Quilt。** Minecraft 1.19–26.2 的版本清单、安装与验证情况见 [CONTINUED.md](CONTINUED.md)。下方保留上游历史文档，其 Forge / NeoForge 信息不属于本分支的维护范围。
 
 <div align="right">
 🌍<a href="https://github.com/kitUIN/ChatImage/blob/fabric-1.19.3/README_EN.md">English</a> / 中文

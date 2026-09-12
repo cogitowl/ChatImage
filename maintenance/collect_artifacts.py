@@ -12,20 +12,19 @@ ROOT = Path(__file__).resolve().parents[1]
 def collect(target, output):
     project = ROOT / target['path']
     loader = target['loader']
+    if loader not in ('fabric', 'quilt'):
+        raise ValueError(f'Loader is outside the maintained scope: {loader}')
     if target['path'].startswith('modern/'):
         folder = project / 'build/libs'
         suffix = f"+{target['target']}+{loader}"
-        if loader == 'forge' and target['target'].startswith('1.'):
-            suffix += '-srg'
     else:
         folder = ROOT / 'ChatImage-jar' / (ROOT / 'version.txt').read_text().strip()
         suffix = f"+{target['target']}+{loader}"
-        # The upstream NeoForge 1.21 target is named 1.21.0 in its build properties.
     candidates = [p for p in folder.glob('ChatImage-*' + suffix + '.jar') if not p.name.startswith('ChatImage-smoke-')]
     if len(candidates) != 1:
         raise RuntimeError(f"Expected one installable jar for {loader} {target['target']}: {candidates}")
     source = candidates[0]
-    metadata = 'fabric.mod.json' if loader in ('fabric', 'quilt') else ('META-INF/neoforge.mods.toml' if loader == 'neoforge' else 'META-INF/mods.toml')
+    metadata = 'fabric.mod.json'
     with zipfile.ZipFile(source) as archive:
         names = set(archive.namelist())
         required = {metadata, 'io/github/kituin/chatimage/ChatImage.class'}
@@ -42,7 +41,7 @@ def collect(target, output):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--loader', required=True)
+    parser.add_argument('--loader', required=True, choices=['fabric', 'quilt'])
     parser.add_argument('--target', required=True)
     parser.add_argument('--output', type=Path, default=ROOT / 'dist')
     args = parser.parse_args()

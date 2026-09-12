@@ -53,9 +53,12 @@
 // ELSE IF fabric-1.18.2
 //    "fabric-command-api-v1": "*",
 //    "minecraft": ">=1.18.2-"
+// ELSE IF fabric-1.19
+//    "fabric-command-api-v2": "*",
+//    "minecraft": ["1.19"]
 // ELSE IF fabric-1.19.1
 //    "fabric-command-api-v2": "*",
-//    "minecraft": ["1.19","1.19.1"]
+//    "minecraft": ["1.19.1"]
 // ELSE IF fabric-1.19.2
 //    "fabric-command-api-v2": "*",
 //    "minecraft": "~1.19.2"

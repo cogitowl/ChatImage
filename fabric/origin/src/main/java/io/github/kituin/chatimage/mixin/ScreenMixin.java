@@ -157,7 +157,7 @@ public abstract class ScreenMixin extends AbstractParentElement implements Drawa
 //                        RenderSystem.setShader(GameRenderer::getPositionColorShader);
 //                        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 //                        RenderSystem.setShaderTexture(0, (Identifier) frame.getId());
-// ELSE IF fabric-1.19.1 ||  fabric-1.19.2
+// ELSE IF >= fabric-1.19 && <= fabric-1.19.2
 //                        Tessellator tessellator = Tessellator.getInstance();
 //                        BufferBuilder bufferBuilder = tessellator.getBuffer();
 //                        RenderSystem.setShader(GameRenderer::getPositionColorShader);

@@ -1,3 +1,5 @@
+> **CoGitOwl continued branch: Fabric and Quilt only.** See [CONTINUED.md](CONTINUED.md) for Minecraft 1.19–26.2 targets, installation, and verification. The upstream documentation below is preserved for history; its Forge / NeoForge information is outside this branch’s maintenance scope.
+
 <div align="right">
 🌍English / <a href="https://github.com/kitUIN/ChatImage#ChatImage">中文</a>
 </div>

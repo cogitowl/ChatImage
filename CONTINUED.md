@@ -1,63 +1,77 @@
 # ChatImage Continued
 
-这是 CoGitOwl 维护的 ChatImage 分支，保留 kitUIN 的原始版权与 MIT 许可证。开发分支为 `continued/1.19-26.2`，所有工作仅提交到此 fork。
+CoGitOwl 维护的 ChatImage 分支，保留 kitUIN 的版权与 MIT 许可证。开发分支为 [`continued/1.19-26.2`](https://github.com/cogitowl/ChatImage/tree/continued/1.19-26.2)，所有工作仅提交到此 fork。
 
-目标是覆盖 Minecraft Java 1.19 至 26.2 的 Fabric、Forge、Quilt、NeoForge，并跟进后续正式版。适配正在进行中；具体进度以 `maintenance/targets.json` 为准，不代表全部目标已可用于整合包。
+本分支只维护 **Fabric 和 Quilt**，覆盖 Minecraft Java 1.19 至 26.2，并跟进后续正式版。Forge / NeoForge 已按维护者要求退出当前及后续维护范围；仓库中的相关旧源码仅作历史保留，旧工作流已停用归档。
 
-## 当前验证
+## 版本与验证
 
-- Fabric / Quilt：26.1、26.1.1、26.1.2、26.2 已构建。
-- Fabric：26.1.2、26.2 已通过客户端图片加载与悬浮渲染测试。
-- Quilt：26.2 已在真正的 Quilt 0.30.1 上通过相同客户端测试。
-- NeoForge：26.2.0.82 已通过构建和客户端测试。26.2.0.87 的开发环境在编译 Minecraft `HolderSet` 时失败，因此当前固定使用官方示例采用的 26.2.0.82。
-- Forge：26.2-65.1.3 已构建，并使用实际发布 JAR 通过客户端测试。
-- Fabric：1.19.1 至 1.21.11 的全部现有构建目标已通过编译。1.21.11 使用新的聊天点击注入点。
-- Quilt：1.19.1 至 1.21.11 的 14 个构建目标全部通过编译；1.21.11 已通过真实加载器启动、Mixin 审计及 PNG 纹理注册测试。
-- NeoForge：1.21.8、1.21.10、1.21.11 已通过客户端图片渲染测试；1.21.9、26.1、26.1.1、26.1.2 已构建。
-- Forge：26.1、26.1.2、1.21.8、1.21.9、1.21.10 已构建；1.21.11 已生成 SRG 发行包，并在开发环境通过客户端图片渲染测试。安装版 SRG JAR 的完整启动测试尚未完成。
-- 其他旧版本继承上游的源码生成机制，正在逐项重新验证。尚未完成跨加载器联机文件传输、专用服务器和所有游戏补丁版本的测试。
+每种加载器有 19 个构建目标，共 38 个发行包。详细状态以 [`maintenance/targets.json`](maintenance/targets.json) 为准。
 
-NeoForge 没有对应 1.19 系列和 1.20 的正式加载器，不能为这些版本生成 NeoForge 模组。
+| 安装包中的游戏版本标记 | 选择安装包时使用的游戏版本 |
+| --- | --- |
+| 1.19、1.19.1、1.19.2、1.19.3、1.19.4 | 各自对应版本 |
+| 1.20 | 1.20、1.20.1、1.20.2 |
+| 1.20.3 | 1.20.3、1.20.4 |
+| 1.20.5 | 1.20.5、1.20.6 |
+| 1.21 | 1.21、1.21.1 |
+| 1.21.2 | 1.21.2、1.21.3 |
+| 1.21.4、1.21.5 | 各自对应版本 |
+| 1.21.6 | 1.21.6、1.21.7、1.21.8 |
+| 1.21.9 | 1.21.9、1.21.10 |
+| 1.21.11、26.1、26.1.1、26.1.2、26.2 | 各自对应版本 |
 
-Forge 也没有发布 1.20.5 和 1.21.2 的加载器；这些游戏版本只能使用当时存在的其他加载器。
+同一包声明多个补丁版本的范围继承自上游，不表示已在每个补丁版本逐一运行。1.19 与 1.19.1 的聊天接口不同，本分支为 1.19 单独生成包，并收窄 1.19.1 的声明范围。
+
+1.19.2、1.19.3、1.19.4 继承的元数据使用较宽的 `~` 版本条件；请仍按表中的精确版本选择包。
+
+本次验证在本地完成：
+
+- Fabric / Quilt 的全部目标均进行独立构建，产物收集时检查主类、模组元数据与测试代码隔离，并生成 SHA-256。
+- Fabric 26.1.2、26.2 及真实 Quilt 0.30.1 上的 26.2：通过客户端启动、Mixin 审计、聊天图片事件往返编码、PNG 纹理加载及真实悬浮图片渲染测试。
+- Fabric / Quilt 1.19，以及 Quilt 1.21.11：通过真实加载器启动、Mixin 审计及 PNG 纹理注册测试。
+- 尚未逐一验证所有补丁版本、完整多人联机传输、专用服务器及整合包兼容性。构建通过与客户端测试通过分别记录，不等同于全面运行认证。
 
 ## 安装
 
-每个 Minecraft 实例只放入一个对应版本、对应加载器的 ChatImage JAR。26.x 使用 Java 25；Fabric / Quilt 还需要对应游戏版本的 Fabric API。Quilt 从 26.1 起使用 Fabric API，不再使用已停止更新的 QFAPI。Mod Menu 为可选配置入口，也可以通过 End 键打开设置。
+按上表选择游戏版本，再选择文件名以 `+fabric.jar` 或 `+quilt.jar` 结尾的包。每个游戏实例的 `mods` 文件夹只安装一个对应的 ChatImage 包，不能把整个压缩包中的所有 JAR 一起放进去。
 
-modern 目录下的版本已内置 ChatImageCode，并直接维护 `show_chatimage` 的聊天事件适配，不再需要单独安装 ActionLib。旧版依赖仍按上游各版本的元数据执行，Mod Menu 已改为可选编译依赖。
+1.19–1.20.4 使用 Java 17，1.20.5–1.21.11 使用 Java 21，26.x 使用 Java 25。安装对应游戏版本的 Fabric 或 Quilt Loader；Quilt 验证使用 0.30.1。
 
-## 构建
+26.x 还需要对应游戏版本的 Fabric API。Quilt 26.x 同样使用 Fabric API。旧版已内置需要的 Fabric API 模块、ChatImageCode 和 ActionLib，不必重复安装这些依赖；其他模组要求完整 Fabric API 时，仍须按其说明安装。
 
-26.x 每个目标都有独立 Gradle 项目，例如：
+Mod Menu 为可选配置入口，也可通过 End 键打开设置。不要安装 `-sources.jar`、开发 JAR 或 `ChatImage-smoke-*.jar`。
+
+## 构建与测试
+
+旧版先在仓库根目录使用 Java 21 运行 `bash init.sh` 生成源码，再进入对应的 `fabric/fabric-*` 目录：
 
 ```sh
-cd modern/fabric-26.2
-bash gradlew build
+bash gradlew build            # Fabric
+bash gradlew build -Pquilt    # Quilt
+bash gradlew runSmoke         # Fabric 客户端测试
+bash gradlew runSmoke -Pquilt # 实际 Quilt 客户端测试
 ```
 
-可把目录中的 `fabric` 换成 `quilt`、`forge` 或 `neoforge`，游戏版本见 `maintenance/targets.json`。产物在该项目的 `build/libs/`。不要安装 `-sources.jar` 或测试用的 `ChatImage-smoke-*.jar`。
+旧版发行包位于 `ChatImage-jar/<模组版本>/`。编译输出按游戏版本使用 Java 17 或 21。
 
-1.20.5 至 1.21.11 的新 Forge / NeoForge 项目也位于 `modern/`，使用 Java 21。Forge 1.x 安装包必须使用 `-srg.jar`。
+26.x 使用 Java 25，进入 `modern/fabric-<游戏版本>` 或 `modern/quilt-<游戏版本>`：
 
-旧版先在仓库根目录以 Java 21 运行 `bash init.sh` 生成源码，再进入 `fabric/fabric-*`、`forge/forge-*` 或 `neoforge/neoforge-*` 构建。旧版 Forge 构建使用 Java 17，Fabric / NeoForge 构建使用 Java 21。ForgeGradle 7 的开发启动器额外需要可被 Gradle 找到的 Java 8；游戏本身按版本使用 Java 17、21 或 25。
+```sh
+bash gradlew build
+bash gradlew runSmoke
+```
 
-旧版 Quilt 与 Fabric 共用源码，通过 `bash gradlew build -Pquilt` 生成 Quilt 标记的包。可用 `bash gradlew runSmoke -Pquilt` 验证实际 Quilt 运行；省略 `-Pquilt` 可验证 Fabric。旧版测试覆盖启动、Mixin 与 PNG 纹理注册。
+26.x 发行包位于各项目 `build/libs/`。客户端测试会启动单独的开发游戏，结束时写入 `run-smoke/smoke-result.txt`；结果缺失或不以 `OK:` 开头时，构建任务失败。测试代码位于独立 source set，不进入发行包。
 
-`maintenance/collect_artifacts.py --loader <加载器> --target <构建目标>` 只收集可安装的发行包，并生成 SHA-256 校验文件。
+在仓库根目录使用 `python3 maintenance/collect_artifacts.py --loader fabric --target 26.2` 收集一个可安装包及其 SHA-256；`--loader` 只接受 `fabric`、`quilt`。
 
-## 客户端回归测试
+完整压缩包可在构建各目标后运行 `python3 maintenance/package_release.py --output dist/ChatImage-Continued-Fabric-Quilt.zip` 生成。该命令按维护清单收集发行包、核对版本声明并附上安装说明和校验文件。
 
-Fabric / Quilt 26.x：`bash gradlew runSmoke`。
+## 后续维护
 
-Forge / NeoForge 26.x：`bash gradlew runClient -Psmoke`。
+`modern/common` 放共享图片、配置界面、聊天与网络数据代码；`modern/game-26.1`、`modern/game-26.2` 处理游戏界面差异；`modern/fabric` 供 Fabric / Quilt 共用。旧版继续使用源码模板生成机制。
 
-测试会打开单独的开发客户端，审计 Mixin，往返编码 `show_chatimage`，加载临时 PNG，注册纹理，执行真实悬浮图片渲染，然后关闭客户端。成功必须产生 `run-smoke/smoke-result.txt` 中的 `OK:`；Gradle 会在结果缺失或失败时报告错误。该测试代码使用独立 source set，不会打包进正式模组。测试不覆盖完整多人联机功能。
+`.github/workflows/continued.yml` 只构建 Fabric / Quilt。上游工作流保存在 `maintenance/upstream-workflows/`，不再执行。当前 fork 的 GitHub Actions 因账号 billing lock 无法启动，需要解除账号限制后才能使用云端构建。
 
-## 维护结构
-
-`modern/common` 放共享图片、配置界面、聊天与网络数据代码；`modern/game-26.1`、`modern/game-26.2` 处理游戏界面所有权的变化；`modern/fabric`、`modern/forge`、`modern/neoforge` 处理加载器生命周期与网络接口。Fabric 和 Quilt 使用同一功能实现，并分别启动验证。
-
-GitHub Actions 会按明确的目标矩阵构建。当前 fork 的 Actions 因 GitHub 账号 billing lock 无法开始运行，本次验证在本地完成。此状态不改变任何模组编译结果；启用云端构建前需要解除 GitHub 的账号限制。
-
-后续版本通过本次 Codex 任务中的定期维护检查跟进（每周三 10:00，Asia/Shanghai）。任务检查正式版与官方加载器版本，有变化时继续适配与验证，只在有结果或实质性阻碍时通知。由于任务使用本地仓库，电脑和应用需要处于运行状态；该机制不保证新游戏版本发布当天即可完成适配。
+后续正式版通过本次 Codex 任务每周三 10:00（Asia/Shanghai）的维护检查跟进，仅考虑 Fabric / Quilt。发现变化后继续适配和验证，有结果或实质性阻碍时通知。该维护任务依赖本地电脑和应用运行，不保证新游戏正式版发布当天完成适配。

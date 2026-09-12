@@ -37,7 +37,7 @@ public class ConfirmNsfwScreen extends ConfirmScreen {
 
     public ConfirmNsfwScreen(BooleanConsumer callback, Text title, Text message) {
         super(callback, title, message);
-// IF fabric-1.16.5 || fabric-1.18.2
+// IF <= fabric-1.19
 //        this.yesTranslated = ScreenTexts.YES;
 //        this.noTranslated = ScreenTexts.NO;
 // ELSE
@@ -47,14 +47,14 @@ public class ConfirmNsfwScreen extends ConfirmScreen {
     }
 
     protected void addButtons(int y) {
-// IF fabric-1.16.5 || fabric-1.18.2
+// IF <= fabric-1.19
 //        Text yesT =  this.yesTranslated;
 //        Text noT =  this.noTranslated;
 // ELSE
 //        Text yesT =  this.yesText;
 //        Text noT =  this.noText;
 // END IF
-// IF fabric-1.16.5 || fabric-1.18.2 || fabric-1.19.1 || fabric-1.19.2
+// IF <= fabric-1.19.2
 //        addDrawableWeight(new ButtonWidget(this.width / 2 - 50 - 52, y, 100, 20, yesT, (button) -> {
 //            this.callback.accept(true);
 //        }));
