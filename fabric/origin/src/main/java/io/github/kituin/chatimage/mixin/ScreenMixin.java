@@ -1,3 +1,4 @@
+// ONLY < fabric-1.21.11
 package io.github.kituin.chatimage.mixin;
 
 
@@ -245,10 +246,8 @@ public abstract class ScreenMixin extends AbstractParentElement implements Drawa
         setScreen(this.client, (Screen) (Object) this);
     }
 
-// IF < fabric-1.21.11
     @Inject(at = @At("RETURN"),
             method = "handleTextClick", cancellable = true)
-// END IF
     private void handleTextClick(Style style, CallbackInfoReturnable<Boolean> cir) {
         if (style != null && style.getHoverEvent() != null) {
             HoverEvent hoverEvent = style.getHoverEvent();

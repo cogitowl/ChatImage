@@ -53,3 +53,5 @@ bin/
 **/run/
 **/run-smoke/
 *.log
+
+/dist/

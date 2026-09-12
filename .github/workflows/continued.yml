@@ -52,7 +52,14 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
       - name: Build
         working-directory: ${{ matrix.path }}
-        run: bash gradlew build --no-daemon --stacktrace
+        env:
+          LOADER: ${{ matrix.loader }}
+        run: |
+          if [ "$LOADER" = quilt ] && [ -f fabric.gradle ]; then
+            bash gradlew build -Pquilt --no-daemon --stacktrace
+          else
+            bash gradlew build --no-daemon --stacktrace
+          fi
       - name: Runtime smoke test
         if: ${{ inputs.smoke && startsWith(matrix.path, 'modern/') }}
         working-directory: ${{ matrix.path }}
@@ -61,14 +68,15 @@ jobs:
         run: |
           case "$LOADER" in
             fabric|quilt) xvfb-run -a timeout 240 bash gradlew runSmoke --no-daemon ;;
-            forge|neoforge) xvfb-run -a timeout 240 bash gradlew runClient -Psmoke --no-daemon -Porg.gradle.java.installations.fromEnv=JAVA_HOME_8_X64,JAVA_HOME_25_X64 ;;
+            forge|neoforge) xvfb-run -a timeout 240 bash gradlew runClient -Psmoke --no-daemon -Porg.gradle.java.installations.fromEnv=JAVA_HOME_8_X64,JAVA_HOME_21_X64,JAVA_HOME_25_X64 ;;
           esac
+      - name: Stage installable jars
+        env:
+          LOADER: ${{ matrix.loader }}
+          TARGET: ${{ matrix.target }}
+        run: python3 maintenance/collect_artifacts.py --loader "$LOADER" --target "$TARGET"
       - uses: actions/upload-artifact@v4
         with:
           name: ChatImage-${{ matrix.loader }}-${{ matrix.target }}
-          path: |
-            ChatImage-jar/**/*.jar
-            ${{ matrix.path }}/build/libs/*.jar
-            !**/*-sources.jar
-            !**/ChatImage-smoke-*.jar
+          path: dist/*
           if-no-files-found: error

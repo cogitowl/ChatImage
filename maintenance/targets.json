@@ -38,7 +38,7 @@
       ],
       "path": "fabric/fabric-1.19.3",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "build-verified"
     },
     {
       "loader": "fabric",
@@ -48,18 +48,19 @@
       ],
       "path": "fabric/fabric-1.19.4",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "build-verified"
     },
     {
       "loader": "fabric",
       "target": "1.20",
       "game_versions": [
         "1.20",
+        "1.20.1",
         "1.20.2"
       ],
       "path": "fabric/fabric-1.20",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "build-verified"
     },
     {
       "loader": "fabric",
@@ -70,7 +71,7 @@
       ],
       "path": "fabric/fabric-1.20.3",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "build-verified"
     },
     {
       "loader": "fabric",
@@ -81,7 +82,7 @@
       ],
       "path": "fabric/fabric-1.20.5",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "build-verified"
     },
     {
       "loader": "fabric",
@@ -92,7 +93,7 @@
       ],
       "path": "fabric/fabric-1.21",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "build-verified"
     },
     {
       "loader": "fabric",
@@ -103,7 +104,7 @@
       ],
       "path": "fabric/fabric-1.21.2",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "build-verified"
     },
     {
       "loader": "fabric",
@@ -113,7 +114,7 @@
       ],
       "path": "fabric/fabric-1.21.4",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "build-verified"
     },
     {
       "loader": "fabric",
@@ -123,7 +124,7 @@
       ],
       "path": "fabric/fabric-1.21.5",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "build-verified"
     },
     {
       "loader": "fabric",
@@ -135,7 +136,7 @@
       ],
       "path": "fabric/fabric-1.21.6",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "build-verified"
     },
     {
       "loader": "fabric",
@@ -153,6 +154,9 @@
       "target": "1.19",
       "game_versions": [
         "1.19",
+        "1.19.1",
+        "1.19.2",
+        "1.19.3",
         "1.19.4"
       ],
       "path": "forge/forge-1.19",
@@ -401,7 +405,7 @@
       ],
       "path": "modern/forge-26.1.2",
       "java": 25,
-      "status": "port-in-progress"
+      "status": "build-verified"
     },
     {
       "loader": "forge",
@@ -411,7 +415,7 @@
       ],
       "path": "modern/forge-26.2",
       "java": 25,
-      "status": "build-verified"
+      "status": "runtime-smoke-verified"
     },
     {
       "loader": "neoforge",
@@ -452,6 +456,216 @@
       "path": "modern/neoforge-26.2",
       "java": 25,
       "status": "runtime-smoke-verified"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.19.1",
+      "game_versions": [
+        "1.19",
+        "1.19.1"
+      ],
+      "path": "fabric/fabric-1.19.1",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.19.2",
+      "game_versions": [
+        "1.19.2"
+      ],
+      "path": "fabric/fabric-1.19.2",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.19.3",
+      "game_versions": [
+        "1.19.3"
+      ],
+      "path": "fabric/fabric-1.19.3",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.19.4",
+      "game_versions": [
+        "1.19.4"
+      ],
+      "path": "fabric/fabric-1.19.4",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.20",
+      "game_versions": [
+        "1.20",
+        "1.20.1",
+        "1.20.2"
+      ],
+      "path": "fabric/fabric-1.20",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.20.3",
+      "game_versions": [
+        "1.20.3",
+        "1.20.4"
+      ],
+      "path": "fabric/fabric-1.20.3",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.20.5",
+      "game_versions": [
+        "1.20.5",
+        "1.20.6"
+      ],
+      "path": "fabric/fabric-1.20.5",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.21",
+      "game_versions": [
+        "1.21",
+        "1.21.1"
+      ],
+      "path": "fabric/fabric-1.21",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.21.2",
+      "game_versions": [
+        "1.21.2",
+        "1.21.3"
+      ],
+      "path": "fabric/fabric-1.21.2",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.21.4",
+      "game_versions": [
+        "1.21.4"
+      ],
+      "path": "fabric/fabric-1.21.4",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.21.5",
+      "game_versions": [
+        "1.21.5"
+      ],
+      "path": "fabric/fabric-1.21.5",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.21.6",
+      "game_versions": [
+        "1.21.6",
+        "1.21.7",
+        "1.21.8"
+      ],
+      "path": "fabric/fabric-1.21.6",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.21.9",
+      "game_versions": [
+        "1.21.9",
+        "1.21.10"
+      ],
+      "path": "fabric/fabric-1.21.9",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "quilt",
+      "target": "1.21.11",
+      "game_versions": [
+        "1.21.11"
+      ],
+      "path": "fabric/fabric-1.21.11",
+      "java": 21,
+      "status": "runtime-smoke-verified"
+    },
+    {
+      "loader": "forge",
+      "target": "1.21.9",
+      "game_versions": [
+        "1.21.9"
+      ],
+      "path": "modern/forge-1.21.9",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "forge",
+      "target": "1.21.10",
+      "game_versions": [
+        "1.21.10"
+      ],
+      "path": "modern/forge-1.21.10",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "forge",
+      "target": "1.21.11",
+      "game_versions": [
+        "1.21.11"
+      ],
+      "path": "modern/forge-1.21.11",
+      "java": 21,
+      "status": "build-verified"
+    },
+    {
+      "loader": "neoforge",
+      "target": "1.21.9",
+      "game_versions": [
+        "1.21.9"
+      ],
+      "path": "modern/neoforge-1.21.9",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "neoforge",
+      "target": "1.21.10",
+      "game_versions": [
+        "1.21.10"
+      ],
+      "path": "modern/neoforge-1.21.10",
+      "java": 21,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "neoforge",
+      "target": "1.21.11",
+      "game_versions": [
+        "1.21.11"
+      ],
+      "path": "modern/neoforge-1.21.11",
+      "java": 21,
+      "status": "runtime-smoke-verified"
     }
   ],
   "unavailable": [
@@ -466,6 +680,14 @@
         "1.20"
       ],
       "reason": "NeoForge did not publish a loader for these Minecraft versions."
+    },
+    {
+      "loader": "forge",
+      "game_versions": [
+        "1.20.5",
+        "1.21.2"
+      ],
+      "reason": "Forge did not publish a loader for these Minecraft versions."
     }
   ]
 }
