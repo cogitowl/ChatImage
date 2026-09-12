@@ -41,3 +41,15 @@ bin/
 ### Mac OS ###
 .DS_Store
 !neoforge/origin/
+# Generated legacy version projects (init.sh regenerates them)
+/ChatImage-jar/
+/fabric/fabric-*/*
+!/fabric/fabric-*/support_version.txt
+/forge/forge-*/*
+!/forge/forge-*/support_version.txt
+/neoforge/neoforge-*/*
+!/neoforge/neoforge-*/support_version.txt
+# Local game instances and runtime diagnostics
+**/run/
+**/run-smoke/
+*.log

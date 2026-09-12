@@ -22,7 +22,11 @@
 // IF >= fabric-1.20
 //    "DrawContextMixin",
 // END IF
-    "ScreenMixin"
+// IF >= fabric-1.21.11
+//    "ChatScreenMixin"
+// ELSE
+//    "ScreenMixin"
+// END IF
   ],
   "injectors": {
     "defaultRequire": 1

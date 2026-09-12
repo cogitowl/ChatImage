@@ -3,6 +3,11 @@ on:
   push:
     branches: ['continued/**']
   workflow_dispatch:
+    inputs:
+      smoke:
+        description: 'Run graphical smoke tests for modern versions'
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -36,6 +41,11 @@ jobs:
         if: ${{ !startsWith(matrix.path, 'modern/') }}
         run: bash init.sh
       - uses: actions/setup-java@v4
+        if: ${{ matrix.loader == 'forge' && startsWith(matrix.path, 'modern/') }}
+        with:
+          distribution: temurin
+          java-version: '8'
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: ${{ matrix.java }}
@@ -43,10 +53,22 @@ jobs:
       - name: Build
         working-directory: ${{ matrix.path }}
         run: bash gradlew build --no-daemon --stacktrace
+      - name: Runtime smoke test
+        if: ${{ inputs.smoke && startsWith(matrix.path, 'modern/') }}
+        working-directory: ${{ matrix.path }}
+        env:
+          LOADER: ${{ matrix.loader }}
+        run: |
+          case "$LOADER" in
+            fabric|quilt) xvfb-run -a timeout 240 bash gradlew runSmoke --no-daemon ;;
+            forge|neoforge) xvfb-run -a timeout 240 bash gradlew runClient -Psmoke --no-daemon -Porg.gradle.java.installations.fromEnv=JAVA_HOME_8_X64,JAVA_HOME_25_X64 ;;
+          esac
       - uses: actions/upload-artifact@v4
         with:
           name: ChatImage-${{ matrix.loader }}-${{ matrix.target }}
           path: |
             ChatImage-jar/**/*.jar
             ${{ matrix.path }}/build/libs/*.jar
+            !**/*-sources.jar
+            !**/ChatImage-smoke-*.jar
           if-no-files-found: error

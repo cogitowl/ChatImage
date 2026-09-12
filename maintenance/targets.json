@@ -18,7 +18,7 @@
       ],
       "path": "fabric/fabric-1.19.1",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "build-verified"
     },
     {
       "loader": "fabric",
@@ -28,7 +28,7 @@
       ],
       "path": "fabric/fabric-1.19.2",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "build-verified"
     },
     {
       "loader": "fabric",
@@ -146,7 +146,7 @@
       ],
       "path": "fabric/fabric-1.21.9",
       "java": 21,
-      "status": "inherited-unverified"
+      "status": "build-verified"
     },
     {
       "loader": "forge",
@@ -282,6 +282,190 @@
       "path": "neoforge/neoforge-1.21.6",
       "java": 21,
       "status": "inherited-unverified"
+    },
+    {
+      "loader": "fabric",
+      "target": "1.21.11",
+      "game_versions": [
+        "1.21.11"
+      ],
+      "path": "fabric/fabric-1.21.11",
+      "java": 21,
+      "status": "build-verified"
+    },
+    {
+      "loader": "fabric",
+      "target": "26.1",
+      "game_versions": [
+        "26.1"
+      ],
+      "path": "modern/fabric-26.1",
+      "java": 25,
+      "status": "build-verified"
+    },
+    {
+      "loader": "fabric",
+      "target": "26.1.1",
+      "game_versions": [
+        "26.1.1"
+      ],
+      "path": "modern/fabric-26.1.1",
+      "java": 25,
+      "status": "build-verified"
+    },
+    {
+      "loader": "fabric",
+      "target": "26.1.2",
+      "game_versions": [
+        "26.1.2"
+      ],
+      "path": "modern/fabric-26.1.2",
+      "java": 25,
+      "status": "runtime-smoke-verified"
+    },
+    {
+      "loader": "fabric",
+      "target": "26.2",
+      "game_versions": [
+        "26.2"
+      ],
+      "path": "modern/fabric-26.2",
+      "java": 25,
+      "status": "runtime-smoke-verified"
+    },
+    {
+      "loader": "quilt",
+      "target": "26.1",
+      "game_versions": [
+        "26.1"
+      ],
+      "path": "modern/quilt-26.1",
+      "java": 25,
+      "status": "build-verified"
+    },
+    {
+      "loader": "quilt",
+      "target": "26.1.1",
+      "game_versions": [
+        "26.1.1"
+      ],
+      "path": "modern/quilt-26.1.1",
+      "java": 25,
+      "status": "build-verified"
+    },
+    {
+      "loader": "quilt",
+      "target": "26.1.2",
+      "game_versions": [
+        "26.1.2"
+      ],
+      "path": "modern/quilt-26.1.2",
+      "java": 25,
+      "status": "build-verified"
+    },
+    {
+      "loader": "quilt",
+      "target": "26.2",
+      "game_versions": [
+        "26.2"
+      ],
+      "path": "modern/quilt-26.2",
+      "java": 25,
+      "status": "runtime-smoke-verified"
+    },
+    {
+      "loader": "forge",
+      "target": "26.1",
+      "game_versions": [
+        "26.1"
+      ],
+      "path": "modern/forge-26.1",
+      "java": 25,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "forge",
+      "target": "26.1.1",
+      "game_versions": [
+        "26.1.1"
+      ],
+      "path": "modern/forge-26.1.1",
+      "java": 25,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "forge",
+      "target": "26.1.2",
+      "game_versions": [
+        "26.1.2"
+      ],
+      "path": "modern/forge-26.1.2",
+      "java": 25,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "forge",
+      "target": "26.2",
+      "game_versions": [
+        "26.2"
+      ],
+      "path": "modern/forge-26.2",
+      "java": 25,
+      "status": "build-verified"
+    },
+    {
+      "loader": "neoforge",
+      "target": "26.1",
+      "game_versions": [
+        "26.1"
+      ],
+      "path": "modern/neoforge-26.1",
+      "java": 25,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "neoforge",
+      "target": "26.1.1",
+      "game_versions": [
+        "26.1.1"
+      ],
+      "path": "modern/neoforge-26.1.1",
+      "java": 25,
+      "status": "port-in-progress"
+    },
+    {
+      "loader": "neoforge",
+      "target": "26.1.2",
+      "game_versions": [
+        "26.1.2"
+      ],
+      "path": "modern/neoforge-26.1.2",
+      "java": 25,
+      "status": "build-verified"
+    },
+    {
+      "loader": "neoforge",
+      "target": "26.2",
+      "game_versions": [
+        "26.2"
+      ],
+      "path": "modern/neoforge-26.2",
+      "java": 25,
+      "status": "runtime-smoke-verified"
+    }
+  ],
+  "unavailable": [
+    {
+      "loader": "neoforge",
+      "game_versions": [
+        "1.19",
+        "1.19.1",
+        "1.19.2",
+        "1.19.3",
+        "1.19.4",
+        "1.20"
+      ],
+      "reason": "NeoForge did not publish a loader for these Minecraft versions."
     }
   ]
 }

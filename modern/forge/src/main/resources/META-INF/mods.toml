@@ -1,0 +1,15 @@
+modLoader="javafml"
+loaderVersion="[${fml_version},)"
+license="MIT"
+[[mods]]
+modId="chatimage"
+version="${version}"
+displayName="ChatImage Continued"
+authors="kitUIN, CoGitOwl"
+description="Show images in chat. Continued compatibility fork."
+[[dependencies.chatimage]]
+modId="minecraft"
+mandatory=true
+versionRange="[${minecraft_version}]"
+ordering="NONE"
+side="BOTH"

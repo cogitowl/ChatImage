@@ -1,0 +1,75 @@
+plugins { id 'java'; id 'net.minecraftforge.gradle' version '[7.0.17,8)' }
+version='1.4.8-continued.1+26.1+forge'
+group='io.github.cogitowl'
+base { archivesName='ChatImage' }
+repositories { minecraft.mavenizer(it); maven fg.forgeMaven; maven fg.minecraftLibsMaven; mavenCentral(); maven { url='https://maven.kituin.fun/releases' } }
+minecraft { runs { register('client'); register('server') { args '--nogui' } } }
+sourceSets.main {
+ java.srcDirs=['../common/src/main/java', '../game-26.1/src/main/java','../fml/src/main/java','../forge/src/main/java']
+ resources.srcDirs=['../common/src/main/resources','../forge/src/main/resources']
+}
+configurations { embedded }
+dependencies {
+ implementation minecraft.dependency('net.minecraftforge:forge:26.1-62.0.9')
+ implementation 'io.github.kituin:ChatImageCode:0.12.2'
+ embedded('io.github.kituin:ChatImageCode:0.12.2') { transitive=false }
+}
+java { toolchain.languageVersion=JavaLanguageVersion.of(25); sourceCompatibility=JavaVersion.VERSION_25; targetCompatibility=JavaVersion.VERSION_25; withSourcesJar() }
+tasks.withType(JavaCompile).configureEach { options.release=25; options.encoding='UTF-8' }
+processResources {
+ inputs.property 'version', project.version
+ inputs.property 'minecraft_version', project.minecraft_version
+ filesMatching('META-INF/*.toml') { expand version: project.version, minecraft_version: project.minecraft_version, fml_version: '62' }
+}
+jar {
+ from('../LICENSE')
+ from({ configurations.embedded.collect { zipTree(it) } }) {
+  exclude 'META-INF/MANIFEST.MF', 'META-INF/*.SF', 'META-INF/*.RSA', 'META-INF/*.DSA'
+ }
+ duplicatesStrategy=DuplicatesStrategy.EXCLUDE
+ manifest { attributes 'MixinConfigs':'ChatImage.mixins.json' }
+}
+
+sourceSets {
+    smoke {
+        compileClasspath += sourceSets.main.output + configurations.compileClasspath
+        runtimeClasspath += output + compileClasspath + configurations.runtimeClasspath
+        java.srcDirs = ['../smoke-common/src/main/java', '../smoke-forge/src/main/java']
+        resources.srcDirs = ['../smoke-forge/src/main/resources']
+    }
+}
+if (project.hasProperty('smoke')) {
+    minecraft.runs.named('client') {
+        workingDir = layout.projectDirectory.dir('run-smoke')
+    }
+    tasks.matching { it.name == 'runClient' }.configureEach {
+        dependsOn smokeJar
+        doFirst { delete 'run-smoke/smoke-result.txt' }
+        doLast {
+            def result = file('run-smoke/smoke-result.txt')
+            if (!result.exists() || !result.text.startsWith('OK:')) {
+                throw new GradleException('ChatImage runtime smoke test failed: ' + (result.exists() ? result.text : 'no result'))
+            }
+        }
+    }
+}
+
+tasks.register('smokeJar', Jar) {
+    dependsOn smokeClasses
+    archiveBaseName = 'ChatImage-smoke'
+    from sourceSets.smoke.output
+}
+// Forge 26.x discovers mods by container; run the built jar so metadata and
+// annotated classes are scanned together, exactly as in a user's mods folder.
+tasks.withType(JavaExec).matching { it.name in ['runClient', 'runServer'] }.configureEach {
+    dependsOn jar
+    doFirst {
+        def compiled = layout.buildDirectory.get().asFile.toPath()
+        classpath = files(classpath.files.findAll {
+            !it.toPath().startsWith(compiled) && !it.name.startsWith('ChatImageCode-')
+        }, tasks.jar.archiveFile)
+        if (project.hasProperty('smoke') && name == 'runClient') {
+            classpath += files(tasks.smokeJar.archiveFile)
+        }
+    }
+}
